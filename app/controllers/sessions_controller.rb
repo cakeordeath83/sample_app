@@ -8,8 +8,11 @@ class SessionsController < ApplicationController
 			# Method created in SessionsHelper
 			# Also written log_in(user)
 			log_in user
+			
 			# This was defined in the user model
 			params[:session][:remember_me] == "1" ? remember(user) : forget(user)
+			
+			
 			# Redirects to the user's profile page
 			# Also could be written redirect_to user_page(user)
 			redirect_to user
