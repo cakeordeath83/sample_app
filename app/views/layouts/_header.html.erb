@@ -14,7 +14,7 @@
 									<ul class="dropdown-menu">
 										<!-- can also be written user_path(current_user) -->
 										<li><%= link_to "Profile", current_user %></li>
-										<li><%= link_to "Settings", '#' %></li>
+										<li><%= link_to "Settings", edit_user_path(current_user) %></li>
 										<li class="divider"></li>
 										<!-- logout_path defined in routes, just a named route for sessions#destroy -->
 										<li><%= link_to "Log out", logout_path, method: "delete" %></li>

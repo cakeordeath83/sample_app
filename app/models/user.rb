@@ -12,8 +12,10 @@ class User < ActiveRecord::Base
                     format: {with: VALID_EMAIL_REGEX}
 	
 	has_secure_password
+	#allow_nil means that when editing you don't have to update your password too.
 	validates :password, length: {minimum: 6}, 
-											 presence: true
+											 presence: true,
+											 allow_nil: true
   
 	# Only added so that we can create a valid user fixture which can be passed into the login tests
 	def User.digest(string)
