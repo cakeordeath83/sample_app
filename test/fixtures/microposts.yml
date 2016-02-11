@@ -3,15 +3,26 @@
 tuesday:
   content: "Content for Tuesday"
   created_at: <%= 2.days.ago %>
+  user: clair
 
 wednesday:
   content: "Content for Wednesday"
   created_at: <%= 1.day.ago %>
+  user: another
 
 thursday:
   content: "Content for Thursday"
   created_at: <%= 30.minutes.ago %>
+  user: lana
   
 friday:
   content: "Content for Friday"
   created_at: <%= Time.now %>
+  user: malory
+  
+<% 30.times do |n| %>
+micropost_<%= n %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= 42.days.ago %>
+  user: clair
+<% end %>
