@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   def setup
 		@user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
   end
-  
+=begin
   test "should be valid" do
     assert @user.valid?
   end
@@ -76,4 +76,37 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "should follow and unfollow a user" do
+    clair = users(:clair)
+    malory = users(:malory)
+    assert_not clair.following?(malory)
+    clair.follow(another)
+    assert clair.following?(another)
+    assert another.followers.include?(clair)
+    clair.unfollow(another)
+    assert_not clair.following?(another)
+  end
+=end
+
+  test "feed should have the right posts" do
+    clair = users(:clair)
+    malory = users(:malory)
+    another = users(:another)
+    lana = users(:lana)
+    # Posts from followed user
+    another.microposts.each do |post_following|
+      assert clair.feed.include?(post_following)
+    end
+    # Posts from self
+    clair.microposts.each do |post_self|
+     assert clair.feed.include?(post_self)
+    end
+    # Posts from unfollowed user
+    malory.microposts.each do |post_unfollowed|
+      assert_not clair.feed.include?(post_unfollowed)
+    end
+    
+  end
+  
 end
